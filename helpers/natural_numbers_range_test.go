@@ -35,3 +35,29 @@ func TestNaturalNumbersRange(t *testing.T) {
 		}
 	}
 }
+
+func TestNaturalNumbersInverseRange(t *testing.T) {
+	// Arrange
+	testsValues := []testType{
+		{0, 2, []uint16{2, 1, 0}},
+		{1, 2, []uint16{2, 1}},
+		{1, 10, []uint16{10, 9, 8, 7, 6, 5, 4, 3, 2, 1}},
+		{8, 10, []uint16{10, 9, 8}},
+	}
+
+	// Act
+	for i := 0; i < len(testsValues); i++ {
+		output := NaturalNumbersInverseRange(testsValues[i].min, testsValues[i].max)
+
+		// Assert
+		if len(output) != len(testsValues[i].want) {
+			t.Fatalf("the output length is %v, it should be %v", len(output), len(testsValues[i].want))
+		}
+
+		for j := 0; j < len(testsValues[i].want); j++ {
+			if output[j] != testsValues[i].want[j] {
+				t.Fatalf("got %v, it should be %v", output[j], testsValues[i].want[j])
+			}
+		}
+	}
+}
