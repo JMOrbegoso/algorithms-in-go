@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"os"
 	"strings"
+
+	"github.com/JMOrbegoso/algorithms-in-go/other-algorithms/fibonacci"
 )
 
 func main() {
@@ -18,6 +20,8 @@ func main() {
 
 	fmt.Println("\nHi there 👋")
 	fmt.Println("\nYou can choose any of the following algorithms:")
+
+	fmt.Println("1. Fibonacci Sequence")
 
 	fmt.Println("\n0. Close")
 	fmt.Println("\nEnter your option:")
@@ -33,6 +37,9 @@ func main() {
 		}
 
 		switch menuOption {
+		case "1":
+			a = fibonacci.FibonacciSequence{}
+
 		default:
 			fmt.Println("\nPlease, enter only any of the options that were shown before:")
 		}
