@@ -6,7 +6,8 @@ import (
 	"os"
 	"strings"
 
-	"github.com/JMOrbegoso/algorithms-in-go/other-algorithms/fibonacci"
+	fibonacci "github.com/JMOrbegoso/algorithms-in-go/other-algorithms/fibonacci"
+	fibonacci_memoization "github.com/JMOrbegoso/algorithms-in-go/other-algorithms/fibonacci-memoization"
 )
 
 func main() {
@@ -22,6 +23,7 @@ func main() {
 	fmt.Println("\nYou can choose any of the following algorithms:")
 
 	fmt.Println("1. Fibonacci Sequence")
+	fmt.Println("2. Fibonacci Sequence using Memoization")
 
 	fmt.Println("\n0. Close")
 	fmt.Println("\nEnter your option:")
@@ -39,6 +41,8 @@ func main() {
 		switch menuOption {
 		case "1":
 			a = fibonacci.FibonacciSequence{}
+		case "2":
+			a = fibonacci_memoization.FibonacciSequence{}
 
 		default:
 			fmt.Println("\nPlease, enter only any of the options that were shown before:")
