@@ -11,7 +11,12 @@
 ## ✨ Algorithms
 
 - Searching algorithms:
+  - Linear Search.
+  - Binary Search.
 - Sorting algorithms:
+  - Bubble Sort.
+  - Insertion Sort.
+  - Selection Sort.
 - Other algorithms:
   - Fibonacci.
   - Fibonacci using memoization.
