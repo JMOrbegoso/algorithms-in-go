@@ -8,6 +8,7 @@ import (
 
 	fibonacci "github.com/JMOrbegoso/algorithms-in-go/other-algorithms/fibonacci"
 	fibonacci_memoization "github.com/JMOrbegoso/algorithms-in-go/other-algorithms/fibonacci-memoization"
+	bubble_sort "github.com/JMOrbegoso/algorithms-in-go/sorting-algorithms/bubble-sort"
 )
 
 func main() {
@@ -22,8 +23,10 @@ func main() {
 	fmt.Println("\nHi there 👋")
 	fmt.Println("\nYou can choose any of the following algorithms:")
 
-	fmt.Println("1. Fibonacci Sequence")
-	fmt.Println("2. Fibonacci Sequence using Memoization")
+	fmt.Println("1. Bubble Sort")
+
+	fmt.Println("2. Fibonacci Sequence")
+	fmt.Println("3. Fibonacci Sequence using Memoization")
 
 	fmt.Println("\n0. Close")
 	fmt.Println("\nEnter your option:")
@@ -40,8 +43,10 @@ func main() {
 
 		switch menuOption {
 		case "1":
-			a = fibonacci.FibonacciSequence{}
+			a = bubble_sort.BubbleSort{}
 		case "2":
+			a = fibonacci.FibonacciSequence{}
+		case "3":
 			a = fibonacci_memoization.FibonacciSequence{}
 
 		default:
