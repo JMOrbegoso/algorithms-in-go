@@ -4,8 +4,6 @@ import (
 	"bufio"
 	"fmt"
 	"os"
-	"strconv"
-	"strings"
 
 	"github.com/JMOrbegoso/algorithms-in-go/helpers"
 )
@@ -21,21 +19,9 @@ func (f FibonacciSequence) Name() string {
 func (f FibonacciSequence) Show() {
 	var results []uint64
 
+	// Request the parameters
 	reader := bufio.NewReader(os.Stdin)
-	fmt.Println("Enter the last number of the sequence of natural numbers:")
-
-	maxString, err := reader.ReadString('\n')
-	if err != nil {
-		fmt.Println("Invalid entered value", err)
-		return
-	}
-	maxString = strings.TrimSuffix(maxString, "\n")
-
-	max, err := strconv.ParseUint(maxString, 10, 32)
-	if err != nil {
-		fmt.Println("Can't parse the number", err)
-		return
-	}
+	max := helpers.RequestNumber(reader, "Enter the last number of the sequence of natural numbers:")
 
 	// Get natural numbers array
 	naturalNumbers := helpers.NaturalNumbersRange(min, uint16(max))
