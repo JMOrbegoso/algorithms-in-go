@@ -26,7 +26,7 @@ func TestBinarySearch(t *testing.T) {
 
 		// Assert
 		if output != testsValues[i].want {
-			t.Fatalf("got %v, it should be %v", output, testsValues[i].want)
+			t.Fatalf("on the array: %v, got %v, but it should be %v", testsValues[i].array, output, testsValues[i].want)
 		}
 	}
 }
