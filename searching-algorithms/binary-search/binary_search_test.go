@@ -10,7 +10,7 @@ type testType struct {
 	want  int
 }
 
-func TestBinarySearch(t *testing.T) {
+func TestBinarySearchOnTheEntireArray(t *testing.T) {
 	// Arrange
 	testsValues := []testType{
 		{[]int16{0, 1}, 1, 1},
@@ -22,7 +22,7 @@ func TestBinarySearch(t *testing.T) {
 
 	// Act
 	for i := 0; i < len(testsValues); i++ {
-		output := binarySearch(testsValues[i].array, 0, len(testsValues[i].array)-1, testsValues[i].find)
+		output := binarySearchOnTheEntireArray(testsValues[i].array, testsValues[i].find)
 
 		// Assert
 		if output != testsValues[i].want {

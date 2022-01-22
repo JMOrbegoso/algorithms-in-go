@@ -1,5 +1,9 @@
 package binary_search
 
+func binarySearchOnTheEntireArray(array []int16, find int16) int {
+	return binarySearch(array, 0, len(array)-1, find)
+}
+
 func binarySearch(array []int16, leftLimit int, rightLimit int, find int16) int {
 	if leftLimit > rightLimit {
 		return -1
