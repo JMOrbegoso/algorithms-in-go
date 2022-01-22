@@ -39,6 +39,9 @@ go run .
 ```bash
 # Run tests
 go test ./...
+
+# Run test coverage
+go test ./... -cover
 ```
 
 ## 🧑‍💻 Author
