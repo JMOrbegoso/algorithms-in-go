@@ -17,6 +17,7 @@
   - Bubble Sort.
   - Insertion Sort.
   - Selection Sort.
+  - Merge Sort.
 - Other algorithms:
   - Fibonacci.
   - Fibonacci using memoization.
