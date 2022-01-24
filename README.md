@@ -18,6 +18,7 @@
   - Insertion Sort.
   - Selection Sort.
   - Merge Sort.
+  - Quick Sort.
 - Other algorithms:
   - Fibonacci.
   - Fibonacci using memoization.
