@@ -20,6 +20,7 @@
   - Merge Sort.
   - Quick Sort.
 - Other algorithms:
+  - Factorial.
   - Fibonacci.
   - Fibonacci using memoization.
 
