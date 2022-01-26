@@ -21,12 +21,12 @@ func TestBinarySearchOnTheEntireArray(t *testing.T) {
 	}
 
 	// Act
-	for i := 0; i < len(testsValues); i++ {
-		output := binarySearchOnTheEntireArray(testsValues[i].array, testsValues[i].find)
+	for _, testValue := range testsValues {
+		output := binarySearchOnTheEntireArray(testValue.array, testValue.find)
 
 		// Assert
-		if output != testsValues[i].want {
-			t.Fatalf("on the array: %v, got %v, but it should be %v", testsValues[i].array, output, testsValues[i].want)
+		if output != testValue.want {
+			t.Fatalf("on the array: %v, got %v, but it should be %v", testValue.array, output, testValue.want)
 		}
 	}
 }

@@ -21,17 +21,17 @@ func TestInsertionSort(t *testing.T) {
 	}
 
 	// Act
-	for i := 0; i < len(testsValues); i++ {
-		output := insertionSort(testsValues[i].input)
+	for _, testValue := range testsValues {
+		output := insertionSort(testValue.input)
 
 		// Assert
-		if len(output) != len(testsValues[i].want) {
-			t.Fatalf("the output length is %v, it should be %v", len(output), len(testsValues[i].want))
+		if len(output) != len(testValue.want) {
+			t.Fatalf("the output length is %v, it should be %v", len(output), len(testValue.want))
 		}
 
-		for j := 0; j < len(testsValues[i].want); j++ {
-			if output[j] != testsValues[i].want[j] {
-				t.Fatalf("got %v, it should be %v", output[j], testsValues[i].want[j])
+		for j := 0; j < len(testValue.want); j++ {
+			if output[j] != testValue.want[j] {
+				t.Fatalf("got %v, it should be %v", output[j], testValue.want[j])
 			}
 		}
 	}

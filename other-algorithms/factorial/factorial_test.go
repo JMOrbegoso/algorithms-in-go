@@ -18,12 +18,12 @@ func TestFactorial(t *testing.T) {
 	}
 
 	// Act
-	for i := 0; i < len(testsValues); i++ {
-		output := factorial(testsValues[i].input)
+	for _, testValue := range testsValues {
+		output := factorial(testValue.input)
 
 		// Assert
-		if output != testsValues[i].want {
-			t.Fatalf("when the input is %v, it should return %v, but got %v", testsValues[i].input, testsValues[i].want, output)
+		if output != testValue.want {
+			t.Fatalf("when the input is %v, it should return %v, but got %v", testValue.input, testValue.want, output)
 		}
 	}
 }

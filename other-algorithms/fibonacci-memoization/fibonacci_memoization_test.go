@@ -22,14 +22,14 @@ func TestFibonacci(t *testing.T) {
 	}
 
 	// Act
-	for i := 0; i < len(testsValues); i++ {
+	for _, testValue := range testsValues {
 		cache := make(map[uint8]uint64)
 
-		output := fibonacci_memoization(testsValues[i].input, cache)
+		output := fibonacci_memoization(testValue.input, cache)
 
 		// Assert
-		if output != testsValues[i].want {
-			t.Fatalf("when the input is %v, it should return %v, but got %v", testsValues[i].input, testsValues[i].want, output)
+		if output != testValue.want {
+			t.Fatalf("when the input is %v, it should return %v, but got %v", testValue.input, testValue.want, output)
 		}
 	}
 }
