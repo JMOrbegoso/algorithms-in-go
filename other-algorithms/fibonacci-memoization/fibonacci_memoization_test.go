@@ -23,9 +23,7 @@ func TestFibonacci(t *testing.T) {
 
 	// Act
 	for _, testValue := range testsValues {
-		cache := make(map[uint8]uint64)
-
-		output := fibonacci_memoization(testValue.input, cache)
+		output := fibonacci(testValue.input)
 
 		// Assert
 		if output != testValue.want {

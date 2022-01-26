@@ -26,12 +26,9 @@ func (f FibonacciSequence) Show() {
 	// Get natural numbers array
 	naturalNumbers := helpers.NaturalNumbersRange(min, uint16(max))
 
-	// Declare the hash map
-	cache := make(map[uint8]uint64)
-
 	// Use fibonacci
 	for i := 0; i < len(naturalNumbers); i++ {
-		result := fibonacci_memoization(uint8(i), cache)
+		result := fibonacci(uint8(i))
 		results = append(results, result)
 	}
 
