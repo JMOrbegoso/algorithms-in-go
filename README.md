@@ -1,5 +1,5 @@
-<h1 align="center">Algorithms in Go</h1>
-<h2 align="center">Repository with many algorithms written in Go</h2>
+<h1 align="center">Data Structures and Algorithms in Go</h1>
+<h2 align="center">Repository with Data Structures and Algorithms written in Go, each one with its respective test</h2>
 
 <br/>
 
@@ -8,10 +8,13 @@
     <img src="https://img.shields.io/badge/%F0%9F%A7%AA-Go%20tests-brightgreen" alt="Go tests badge"/>
 </p>
 
-## ✨ Algorithms
+## 🏛️ Data Structures
 
 - Linear data structures:
   - Linked Lists.
+
+## ⚙️ Algorithms
+
 - Searching algorithms:
   - Linear Search.
   - Binary Search.
