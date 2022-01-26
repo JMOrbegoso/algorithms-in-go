@@ -10,6 +10,8 @@
 
 ## ✨ Algorithms
 
+- Linear data structures:
+  - Linked Lists.
 - Searching algorithms:
   - Linear Search.
   - Binary Search.
