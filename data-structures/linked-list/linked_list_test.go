@@ -18,13 +18,13 @@ func TestPreppendInEmptyLinkedList(t *testing.T) {
 
 	// Assert
 	if linkedList.length != 1 {
-		t.Errorf("expected length: %v, got %v", 1, linkedList.length)
+		t.Errorf("expected %v, got %v", 1, linkedList.length)
 	}
 	if linkedList.head.value != node1.value {
 		t.Errorf("expected %v, got %v", node1.value, linkedList.head.value)
 	}
 	if linkedList.head.next != nil {
-		t.Errorf("linkedList.head.next should be nil")
+		t.Errorf("expected %v, got %v", nil, linkedList.head.next)
 	}
 }
 
@@ -42,7 +42,7 @@ func TestPreppend(t *testing.T) {
 
 	// Assert
 	if linkedList.length != 3 {
-		t.Errorf("expected length: %v, got %v", 3, linkedList.length)
+		t.Errorf("expected %v, got %v", 3, linkedList.length)
 	}
 	if linkedList.head.value != node1.value {
 		t.Errorf("expected %v, got %v", node1.value, linkedList.head.value)
@@ -54,7 +54,7 @@ func TestPreppend(t *testing.T) {
 		t.Errorf("expected %v, got %v", node2.value, linkedList.head.next.next.value)
 	}
 	if linkedList.head.next.next.next != nil {
-		t.Errorf("linkedList.head.next.next.next should be nil")
+		t.Errorf("expected %v, got %v", nil, linkedList.head.next.next.next)
 	}
 }
 
@@ -68,13 +68,13 @@ func TestAppendInEmptyLinkedList(t *testing.T) {
 
 	// Assert
 	if linkedList.length != 1 {
-		t.Errorf("expected length: %v, got %v", 1, linkedList.length)
+		t.Errorf("expected %v, got %v", 1, linkedList.length)
 	}
 	if linkedList.head.value != node1.value {
 		t.Errorf("expected %v, got %v", node1.value, linkedList.head.value)
 	}
 	if linkedList.head.next != nil {
-		t.Errorf("linkedList.head.next should be nil")
+		t.Errorf("expected %v, got %v", nil, linkedList.head.next)
 	}
 }
 
@@ -92,7 +92,7 @@ func TestAppend(t *testing.T) {
 
 	// Assert
 	if linkedList.length != 3 {
-		t.Errorf("expected length: %v, got %v", 3, linkedList.length)
+		t.Errorf("expected %v, got %v", 3, linkedList.length)
 	}
 	if linkedList.head.value != node1.value {
 		t.Errorf("expected %v, got %v", node1.value, linkedList.head.value)
@@ -104,7 +104,7 @@ func TestAppend(t *testing.T) {
 		t.Errorf("expected %v, got %v", node3.value, linkedList.head.next.next.value)
 	}
 	if linkedList.head.next.next.next != nil {
-		t.Errorf("linkedList.head.next.next.next should be nil")
+		t.Errorf("expected %v, got %v", nil, linkedList.head.next.next.next)
 	}
 }
 
@@ -176,7 +176,7 @@ func TestDeleteByValueNotFound(t *testing.T) {
 
 	// Assert
 	if linkedList.length != 3 {
-		t.Errorf("expected length: %v, got %v", 3, linkedList.length)
+		t.Errorf("expected %v, got %v", 3, linkedList.length)
 	}
 	if linkedList.head.value != node1.value {
 		t.Errorf("expected %v, got %v", node1.value, linkedList.head.value)
@@ -188,7 +188,7 @@ func TestDeleteByValueNotFound(t *testing.T) {
 		t.Errorf("expected %v, got %v", node3.value, linkedList.head.next.next.value)
 	}
 	if linkedList.head.next.next.next != nil {
-		t.Errorf("linkedList.head.next.next.next should be nil")
+		t.Errorf("expected %v, got %v", nil, linkedList.head.next.next.next)
 	}
 }
 
@@ -204,7 +204,7 @@ func TestDeleteHeadByValue(t *testing.T) {
 
 	// Assert
 	if linkedList.length != 2 {
-		t.Errorf("expected length: %v, got %v", 2, linkedList.length)
+		t.Errorf("expected %v, got %v", 2, linkedList.length)
 	}
 	if linkedList.head.value != node2.value {
 		t.Errorf("expected %v, got %v", node2.value, linkedList.head.value)
@@ -213,7 +213,7 @@ func TestDeleteHeadByValue(t *testing.T) {
 		t.Errorf("expected %v, got %v", node3.value, linkedList.head.next.value)
 	}
 	if linkedList.head.next.next != nil {
-		t.Errorf("linkedList.head.next.next should be nil")
+		t.Errorf("expected %v, got %v", nil, linkedList.head.next.next)
 	}
 }
 
@@ -229,7 +229,7 @@ func TestDeleteTailByValue(t *testing.T) {
 
 	// Assert
 	if linkedList.length != 2 {
-		t.Errorf("expected length: %v, got %v", 2, linkedList.length)
+		t.Errorf("expected %v, got %v", 2, linkedList.length)
 	}
 	if linkedList.head.value != node1.value {
 		t.Errorf("expected %v, got %v", node1.value, linkedList.head.value)
@@ -238,7 +238,7 @@ func TestDeleteTailByValue(t *testing.T) {
 		t.Errorf("expected %v, got %v", node2.value, linkedList.head.next.value)
 	}
 	if linkedList.head.next.next != nil {
-		t.Errorf("linkedList.head.next.next should be nil")
+		t.Errorf("expected %v, got %v", nil, linkedList.head.next.next)
 	}
 }
 
@@ -252,10 +252,10 @@ func TestReverseEmptyLinkedList(t *testing.T) {
 
 	// Assert
 	if linkedList.length != 0 {
-		t.Errorf("expected length: %v, got %v", 0, linkedList.length)
+		t.Errorf("expected %v, got %v", 0, linkedList.length)
 	}
 	if linkedList.head != nil {
-		t.Errorf("linkedList.head should be nil")
+		t.Errorf("expected %v, got %v", 0, linkedList.head)
 	}
 }
 
@@ -271,7 +271,7 @@ func TestReverse(t *testing.T) {
 
 	// Assert
 	if linkedList.length != 3 {
-		t.Errorf("expected length: %v, got %v", 3, linkedList.length)
+		t.Errorf("expected %v, got %v", 3, linkedList.length)
 	}
 	if linkedList.head.value != node3.value {
 		t.Errorf("expected %v, got %v", node3.value, linkedList.head.value)
@@ -283,6 +283,6 @@ func TestReverse(t *testing.T) {
 		t.Errorf("expected %v, got %v", node1.value, linkedList.head.next.next.value)
 	}
 	if linkedList.head.next.next.next != nil {
-		t.Errorf("linkedList.head.next.next.next should be nil")
+		t.Errorf("expected %v, got %v", nil, linkedList.head.next.next.next)
 	}
 }
