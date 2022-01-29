@@ -15,6 +15,7 @@
   - Linked Lists.
   - Stack using Linked List.
   - Queue using Linked List.
+  - Hash Map.
 
 ## ⚙️ Algorithms
 
