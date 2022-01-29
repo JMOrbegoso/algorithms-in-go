@@ -11,6 +11,7 @@
 ## 🏛️ Data Structures
 
 - Linear data structures:
+  - Array.
   - Linked Lists.
   - Stack using Linked List.
   - Queue using Linked List.
