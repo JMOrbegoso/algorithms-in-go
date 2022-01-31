@@ -18,6 +18,7 @@
   - Hash Map.
 - Non-Linear data structures:
   - Binary Tree.
+  - Binary Search Tree.
 
 ## ⚙️ Algorithms
 
