@@ -16,6 +16,7 @@
   - Stack using Linked List.
   - Queue using Linked List.
   - Hash Map.
+  - Heaps.
 - Non-Linear data structures:
   - Binary Tree.
   - Binary Search Tree.
