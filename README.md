@@ -36,6 +36,7 @@
   - Factorial.
   - Fibonacci.
   - Fibonacci using memoization.
+  - Number of Islands.
 
 ## ⌚ Prerequisites
 
