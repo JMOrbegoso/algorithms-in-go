@@ -37,6 +37,7 @@
   - Fibonacci.
   - Fibonacci using memoization.
   - Number of Islands.
+  - Smallest Island.
 
 ## ⌚ Prerequisites
 
