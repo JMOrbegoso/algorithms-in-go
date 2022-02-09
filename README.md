@@ -20,6 +20,7 @@
 - Non-Linear data structures:
   - Binary Tree.
   - Binary Search Tree.
+  - Graph.
 
 ## ⚙️ Algorithms
 
