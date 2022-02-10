@@ -85,19 +85,21 @@ func TestGetRightChildIndex(t *testing.T) {
 
 func TestSwap(t *testing.T) {
 	// Arrange
-	inputA := 1
-	inputB := 10
+	heap := MaxHeap{}
+	heap.items = []int{50, 16, 12}
 
 	// Act
-	swap(&inputA, &inputB)
+	heap.swap(0, 1)
 
 	// Assert
-	if inputA != 10 {
-		t.Errorf("expected %v, got %v", 10, inputA)
+	if heap.items[0] != 16 {
+		t.Errorf("expected %v, got %v", 16, heap.items[0])
 	}
-
-	if inputB != 1 {
-		t.Errorf("expected %v, got %v", 1, inputB)
+	if heap.items[1] != 50 {
+		t.Errorf("expected %v, got %v", 50, heap.items[1])
+	}
+	if heap.items[2] != 12 {
+		t.Errorf("expected %v, got %v", 12, heap.items[2])
 	}
 }
 
@@ -107,7 +109,7 @@ func TestHeapifyBottomToTop(t *testing.T) {
 	heap.items = []int{50, 16, 48, 14, 8, 34, 20, 9, 1, 5, 7, 63}
 
 	// Act
-	heap.heapifyBottomToTop(len(heap.items) - 1)
+	heap.heapifyBottomToTop()
 
 	// Assert
 	if heap.items[0] != 63 {

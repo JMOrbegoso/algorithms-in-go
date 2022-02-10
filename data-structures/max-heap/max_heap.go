@@ -16,23 +16,37 @@ func getRightChildIndex(parentIndex int) int {
 	return parentIndex*2 + 2
 }
 
-func swap(a *int, b *int) {
-	temp := *a
-	*a = *b
-	*b = temp
+func (h *MaxHeap) swap(i, j int) {
+	if i < 0 || j < 0 {
+		return
+	}
+
+	if i >= len(h.items) || j >= len(h.items) {
+		return
+	}
+
+	item1 := &h.items[i]
+	item2 := &h.items[j]
+
+	temp := *item1
+	*item1 = *item2
+	*item2 = temp
 }
 
 func (h *MaxHeap) insert(value int) {
 	h.items = append(h.items, value)
-	h.heapifyBottomToTop(len(h.items) - 1)
+	h.heapifyBottomToTop()
 }
 
-func (h *MaxHeap) heapifyBottomToTop(childIndex int) {
-	for h.items[childIndex] > h.items[getParentIndex(childIndex)] {
-		parentIndex := getParentIndex(childIndex)
+func (h *MaxHeap) heapifyBottomToTop() {
+	childIndex := len(h.items) - 1
+	parentIndex := getParentIndex(childIndex)
 
-		swap(&h.items[childIndex], &h.items[parentIndex])
+	for h.items[parentIndex] < h.items[childIndex] {
+		h.swap(parentIndex, childIndex)
+
 		childIndex = parentIndex
+		parentIndex = getParentIndex(childIndex)
 	}
 }
 
@@ -45,7 +59,7 @@ func (h *MaxHeap) extract() int {
 
 	lastIndex := len(h.items) - 1
 
-	swap(&h.items[0], &h.items[lastIndex])
+	h.swap(0, lastIndex)
 
 	h.items = h.items[:lastIndex]
 
@@ -56,12 +70,12 @@ func (h *MaxHeap) extract() int {
 
 func (h *MaxHeap) heapifyTopToBottom() {
 	parentIndex := 0
-	lastIndex := len(h.items) - 1
 	leftChildIndex := getLeftChildIndex(parentIndex)
 	rightChildIndex := getRightChildIndex(parentIndex)
-	greaterChildIndex := 0
+	var greaterChildIndex int
+	lastIndex := len(h.items) - 1
 
-	for leftChildIndex <= lastIndex {
+	for lastIndex >= leftChildIndex {
 		if leftChildIndex == lastIndex {
 			greaterChildIndex = leftChildIndex
 		} else if h.items[leftChildIndex] > h.items[rightChildIndex] {
@@ -71,8 +85,8 @@ func (h *MaxHeap) heapifyTopToBottom() {
 		}
 
 		// Check if the greater child is greater than its parent
-		if h.items[greaterChildIndex] > h.items[parentIndex] {
-			swap(&h.items[greaterChildIndex], &h.items[parentIndex])
+		if h.items[parentIndex] < h.items[greaterChildIndex] {
+			h.swap(parentIndex, greaterChildIndex)
 
 			parentIndex = greaterChildIndex
 			leftChildIndex = getLeftChildIndex(parentIndex)
