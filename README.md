@@ -17,6 +17,7 @@
   - Queue using Linked List.
   - Hash Map.
   - Max Heaps.
+  - Min Heaps.
 - Non-Linear data structures:
   - Binary Tree.
   - Binary Search Tree.
