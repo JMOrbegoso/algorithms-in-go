@@ -60,3 +60,26 @@ func (a *Array) print() {
 		fmt.Println(value)
 	}
 }
+
+func (a *Array) swap(i, j int) {
+	if i < 0 || j < 0 {
+		return
+	}
+
+	if i >= a.count || j >= a.count {
+		return
+	}
+
+	item1 := &a.items[i]
+	item2 := &a.items[j]
+
+	temp := *item1
+	*item1 = *item2
+	*item2 = temp
+}
+
+func (a *Array) invert() {
+	for i := 0; i < (a.count / 2); i++ {
+		a.swap(i, (a.count - 1 - i))
+	}
+}

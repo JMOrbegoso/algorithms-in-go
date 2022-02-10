@@ -9,7 +9,7 @@ import (
 )
 
 func TestArrayNotInitialized(t *testing.T) {
-	// Arrang
+	// Arrange
 
 	// Act
 	array := Array{}
@@ -27,7 +27,7 @@ func TestArrayNotInitialized(t *testing.T) {
 }
 
 func TestInit(t *testing.T) {
-	// Arrang
+	// Arrange
 	array := Array{}
 
 	// Act
@@ -46,7 +46,7 @@ func TestInit(t *testing.T) {
 }
 
 func TestGetIndexNotFound(t *testing.T) {
-	// Arrang
+	// Arrange
 	array := Array{}
 	array.items = []int{3}
 
@@ -60,7 +60,7 @@ func TestGetIndexNotFound(t *testing.T) {
 }
 
 func TestGetIndex(t *testing.T) {
-	// Arrang
+	// Arrange
 	array := Array{}
 	array.items = []int{3, 4, 5}
 
@@ -74,7 +74,7 @@ func TestGetIndex(t *testing.T) {
 }
 
 func TestExpandEmptyArray(t *testing.T) {
-	// Arrang
+	// Arrange
 	array := Array{}
 	array.init(3)
 
@@ -94,7 +94,7 @@ func TestExpandEmptyArray(t *testing.T) {
 }
 
 func TestExpand(t *testing.T) {
-	// Arrang
+	// Arrange
 	array := Array{}
 	array.init(3)
 	array.items = []int{3, 4, 5}
@@ -122,7 +122,7 @@ func TestExpand(t *testing.T) {
 }
 
 func TestInsertWithoutExpansion(t *testing.T) {
-	// Arrang
+	// Arrange
 	array := Array{}
 	array.init(3)
 
@@ -150,7 +150,7 @@ func TestInsertWithoutExpansion(t *testing.T) {
 }
 
 func TestInsertWithExpansion(t *testing.T) {
-	// Arrang
+	// Arrange
 	array := Array{}
 	array.init(3)
 
@@ -211,7 +211,7 @@ func TestRemoveAt(t *testing.T) {
 }
 
 func TestRemoveLastItem(t *testing.T) {
-	// Arrang
+	// Arrange
 	array := Array{}
 	array.init(3)
 	array.items = []int{5, 4, 8}
@@ -236,7 +236,7 @@ func TestRemoveLastItem(t *testing.T) {
 }
 
 func TestPrint(t *testing.T) {
-	// Arrang
+	// Arrange
 	array := Array{}
 	array.items = []int{3, 4, 5}
 
@@ -258,5 +258,146 @@ func TestPrint(t *testing.T) {
 	}
 	if !strings.Contains(string(out), strconv.Itoa(5)) {
 		t.Errorf("expected %v", 5)
+	}
+}
+
+func TestSwapBelowZero(t *testing.T) {
+	// Arrange
+	array := Array{}
+	array.init(2)
+	array.insert(3)
+	array.insert(4)
+
+	// Act
+	array.swap(-1, 1)
+
+	// Assert
+	if array.count != 2 {
+		t.Errorf("expected %v, got %v", 2, array.count)
+	}
+	if array.size != 2 {
+		t.Errorf("expected %v, got %v", 2, array.size)
+	}
+	if array.items[0] != 3 {
+		t.Errorf("expected %v, got %v", 3, array.items[0])
+	}
+	if array.items[1] != 4 {
+		t.Errorf("expected %v, got %v", 4, array.items[1])
+	}
+}
+
+func TestSwapUpperLengh(t *testing.T) {
+	// Arrange
+	array := Array{}
+	array.init(2)
+	array.insert(3)
+	array.insert(4)
+
+	// Act
+	array.swap(1, 2)
+
+	// Assert
+	if array.count != 2 {
+		t.Errorf("expected %v, got %v", 2, array.count)
+	}
+	if array.size != 2 {
+		t.Errorf("expected %v, got %v", 2, array.size)
+	}
+	if array.items[0] != 3 {
+		t.Errorf("expected %v, got %v", 3, array.items[0])
+	}
+	if array.items[1] != 4 {
+		t.Errorf("expected %v, got %v", 4, array.items[1])
+	}
+}
+
+func TestSwap(t *testing.T) {
+	// Arrange
+	array := Array{}
+	array.init(3)
+	array.insert(3)
+	array.insert(4)
+	array.insert(5)
+
+	// Act
+	array.swap(0, 2)
+
+	// Assert
+	if array.count != 3 {
+		t.Errorf("expected %v, got %v", 3, array.count)
+	}
+	if array.size != 3 {
+		t.Errorf("expected %v, got %v", 3, array.size)
+	}
+	if array.items[0] != 5 {
+		t.Errorf("expected %v, got %v", 5, array.items[0])
+	}
+	if array.items[1] != 4 {
+		t.Errorf("expected %v, got %v", 4, array.items[1])
+	}
+	if array.items[2] != 3 {
+		t.Errorf("expected %v, got %v", 3, array.items[2])
+	}
+}
+
+func TestInvertArrayWithOddLengh(t *testing.T) {
+	// Arrange
+	array := Array{}
+	array.init(3)
+	array.insert(3)
+	array.insert(4)
+	array.insert(5)
+
+	// Act
+	array.invert()
+
+	// Assert
+	if array.count != 3 {
+		t.Errorf("expected %v, got %v", 3, array.count)
+	}
+	if array.size != 3 {
+		t.Errorf("expected %v, got %v", 3, array.size)
+	}
+	if array.items[0] != 5 {
+		t.Errorf("expected %v, got %v", 5, array.items[0])
+	}
+	if array.items[1] != 4 {
+		t.Errorf("expected %v, got %v", 4, array.items[1])
+	}
+	if array.items[2] != 3 {
+		t.Errorf("expected %v, got %v", 3, array.items[2])
+	}
+}
+
+func TestInvertArrayWithEvenLengh(t *testing.T) {
+	// Arrange
+	array := Array{}
+	array.init(4)
+	array.insert(3)
+	array.insert(4)
+	array.insert(5)
+	array.insert(6)
+
+	// Act
+	array.invert()
+
+	// Assert
+	if array.count != 4 {
+		t.Errorf("expected %v, got %v", 4, array.count)
+	}
+	if array.size != 4 {
+		t.Errorf("expected %v, got %v", 4, array.size)
+	}
+	if array.items[0] != 6 {
+		t.Errorf("expected %v, got %v", 6, array.items[0])
+	}
+	if array.items[1] != 5 {
+		t.Errorf("expected %v, got %v", 5, array.items[1])
+	}
+	if array.items[2] != 4 {
+		t.Errorf("expected %v, got %v", 4, array.items[2])
+	}
+	if array.items[3] != 3 {
+		t.Errorf("expected %v, got %v", 3, array.items[3])
 	}
 }
