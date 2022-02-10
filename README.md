@@ -39,6 +39,7 @@
   - Fibonacci using memoization.
   - Number of Islands.
   - Smallest Island.
+  - Invert string.
 
 ## ⌚ Prerequisites
 
