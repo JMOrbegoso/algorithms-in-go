@@ -32,10 +32,15 @@ func TestPrint(t *testing.T) {
 	// Arrange
 	vertex6 := Vertex{key: 60}
 	vertex5 := Vertex{key: 50}
-	vertex4 := Vertex{key: 40, adjacent: []*Vertex{&vertex6}}
-	vertex3 := Vertex{key: 30, adjacent: []*Vertex{&vertex5}}
-	vertex2 := Vertex{key: 20, adjacent: []*Vertex{&vertex4}}
-	vertex1 := Vertex{key: 10, adjacent: []*Vertex{&vertex2, &vertex3}}
+	adjacent1 := Adjacent{vertex: &vertex6, distance: 1}
+	vertex4 := Vertex{key: 40, adjacent: []*Adjacent{&adjacent1}}
+	adjacent2 := Adjacent{vertex: &vertex5, distance: 1}
+	vertex3 := Vertex{key: 30, adjacent: []*Adjacent{&adjacent2}}
+	adjacent3 := Adjacent{vertex: &vertex4, distance: 1}
+	vertex2 := Vertex{key: 20, adjacent: []*Adjacent{&adjacent3}}
+	adjacent4 := Adjacent{vertex: &vertex2, distance: 1}
+	adjacent5 := Adjacent{vertex: &vertex3, distance: 1}
+	vertex1 := Vertex{key: 10, adjacent: []*Adjacent{&adjacent4, &adjacent5}}
 	graph := Graph{vertices: []*Vertex{&vertex1, &vertex2, &vertex3, &vertex4, &vertex5, &vertex6}}
 
 	r, w, _ := os.Pipe()
@@ -74,9 +79,16 @@ func TestPrintCyclicGraph(t *testing.T) {
 	vertex2 := Vertex{key: 20}
 	vertex3 := Vertex{key: 30}
 
-	vertex1.adjacent = []*Vertex{&vertex2, &vertex3}
-	vertex2.adjacent = []*Vertex{&vertex1, &vertex3}
-	vertex3.adjacent = []*Vertex{&vertex1, &vertex2}
+	adjacent1 := Adjacent{vertex: &vertex2, distance: 1}
+	adjacent2 := Adjacent{vertex: &vertex3, distance: 1}
+	adjacent3 := Adjacent{vertex: &vertex1, distance: 1}
+	adjacent4 := Adjacent{vertex: &vertex3, distance: 1}
+	adjacent5 := Adjacent{vertex: &vertex1, distance: 1}
+	adjacent6 := Adjacent{vertex: &vertex2, distance: 1}
+
+	vertex1.adjacent = []*Adjacent{&adjacent1, &adjacent2}
+	vertex2.adjacent = []*Adjacent{&adjacent3, &adjacent4}
+	vertex3.adjacent = []*Adjacent{&adjacent5, &adjacent6}
 
 	graph := Graph{vertices: []*Vertex{&vertex1, &vertex2, &vertex3}}
 
@@ -149,19 +161,21 @@ func TestGetVertex(t *testing.T) {
 func TestAddDuplicatedEdge(t *testing.T) {
 	// Arrange
 	vertex2 := Vertex{key: 20}
-	vertex1 := Vertex{key: 10, adjacent: []*Vertex{&vertex2}}
+	adjacent1 := Adjacent{vertex: &vertex2, distance: 1}
+	vertex1 := Vertex{key: 10, adjacent: []*Adjacent{&adjacent1}}
 	graph := Graph{vertices: []*Vertex{&vertex1, &vertex2}}
 
 	// Act
-	graph.addEdge(10, 20)
+	graph.addEdge(10, 20, 1)
 
 	// Assert
 	if len(vertex1.adjacent) != 1 {
 		t.Errorf("expected %v, got %v", 1, len(vertex1.adjacent))
 	}
-	if vertex1.adjacent[0].key != vertex2.key {
-		t.Errorf("expected %v, got %v", vertex2.key, vertex1.adjacent[0].key)
+	if vertex1.adjacent[0].vertex.key != vertex2.key {
+		t.Errorf("expected %v, got %v", vertex2.key, vertex1.adjacent[0].vertex.key)
 	}
+
 }
 
 func TestAddEdge(t *testing.T) {
@@ -171,14 +185,17 @@ func TestAddEdge(t *testing.T) {
 	graph := Graph{vertices: []*Vertex{&vertex1, &vertex2}}
 
 	// Act
-	graph.addEdge(10, 20)
+	graph.addEdge(10, 20, 18)
 
 	// Assert
 	if len(vertex1.adjacent) != 1 {
 		t.Errorf("expected %v, got %v", 1, len(vertex1.adjacent))
 	}
-	if vertex1.adjacent[0].key != vertex2.key {
-		t.Errorf("expected %v, got %v", vertex2.key, vertex1.adjacent[0].key)
+	if vertex1.adjacent[0].vertex.key != vertex2.key {
+		t.Errorf("expected %v, got %v", vertex2.key, vertex1.adjacent[0].vertex.key)
+	}
+	if vertex1.adjacent[0].distance != 18 {
+		t.Errorf("expected %v, got %v", 18, vertex1.adjacent[0].distance)
 	}
 }
 
@@ -215,11 +232,16 @@ func TestContainsNotFound(t *testing.T) {
 func TestHasPath(t *testing.T) {
 	// Arrange
 	vertex6 := Vertex{key: 60}
-	vertex5 := Vertex{key: 50, adjacent: []*Vertex{&vertex6}}
-	vertex4 := Vertex{key: 40, adjacent: []*Vertex{&vertex5}}
-	vertex3 := Vertex{key: 30, adjacent: []*Vertex{&vertex4}}
-	vertex2 := Vertex{key: 20, adjacent: []*Vertex{&vertex3}}
-	vertex1 := Vertex{key: 10, adjacent: []*Vertex{&vertex2}}
+	adjacent1 := Adjacent{vertex: &vertex6, distance: 1}
+	vertex5 := Vertex{key: 50, adjacent: []*Adjacent{&adjacent1}}
+	adjacent2 := Adjacent{vertex: &vertex5, distance: 1}
+	vertex4 := Vertex{key: 40, adjacent: []*Adjacent{&adjacent2}}
+	adjacent3 := Adjacent{vertex: &vertex4, distance: 1}
+	vertex3 := Vertex{key: 30, adjacent: []*Adjacent{&adjacent3}}
+	adjacent4 := Adjacent{vertex: &vertex3, distance: 1}
+	vertex2 := Vertex{key: 20, adjacent: []*Adjacent{&adjacent4}}
+	adjacent5 := Adjacent{vertex: &vertex2, distance: 1}
+	vertex1 := Vertex{key: 10, adjacent: []*Adjacent{&adjacent5}}
 	graph := Graph{vertices: []*Vertex{&vertex1, &vertex2, &vertex3, &vertex4, &vertex5, &vertex6}}
 
 	// Act
@@ -235,11 +257,16 @@ func TestHasNoPath(t *testing.T) {
 	// Arrange
 	vertex7 := Vertex{key: 70}
 	vertex6 := Vertex{key: 60}
-	vertex5 := Vertex{key: 50, adjacent: []*Vertex{&vertex6}}
-	vertex4 := Vertex{key: 40, adjacent: []*Vertex{&vertex5}}
-	vertex3 := Vertex{key: 30, adjacent: []*Vertex{&vertex4}}
-	vertex2 := Vertex{key: 20, adjacent: []*Vertex{&vertex3}}
-	vertex1 := Vertex{key: 10, adjacent: []*Vertex{&vertex2}}
+	adjacent1 := Adjacent{vertex: &vertex6, distance: 1}
+	vertex5 := Vertex{key: 50, adjacent: []*Adjacent{&adjacent1}}
+	adjacent2 := Adjacent{vertex: &vertex5, distance: 1}
+	vertex4 := Vertex{key: 40, adjacent: []*Adjacent{&adjacent2}}
+	adjacent3 := Adjacent{vertex: &vertex4, distance: 1}
+	vertex3 := Vertex{key: 30, adjacent: []*Adjacent{&adjacent3}}
+	adjacent4 := Adjacent{vertex: &vertex3, distance: 1}
+	vertex2 := Vertex{key: 20, adjacent: []*Adjacent{&adjacent4}}
+	adjacent5 := Adjacent{vertex: &vertex2, distance: 1}
+	vertex1 := Vertex{key: 10, adjacent: []*Adjacent{&adjacent5}}
 	graph := Graph{vertices: []*Vertex{&vertex1, &vertex2, &vertex3, &vertex4, &vertex5, &vertex6, &vertex7}}
 
 	// Act
@@ -254,8 +281,10 @@ func TestHasNoPath(t *testing.T) {
 func TestVisitAdjacentVertices(t *testing.T) {
 	// Arrange
 	vertex3 := Vertex{key: 30}
-	vertex2 := Vertex{key: 20, adjacent: []*Vertex{&vertex3}}
-	vertex1 := Vertex{key: 10, adjacent: []*Vertex{&vertex2}}
+	adjacent1 := Adjacent{vertex: &vertex3, distance: 1}
+	vertex2 := Vertex{key: 20, adjacent: []*Adjacent{&adjacent1}}
+	adjacent2 := Adjacent{vertex: &vertex2, distance: 1}
+	vertex1 := Vertex{key: 10, adjacent: []*Adjacent{&adjacent2}}
 	var visitedVertices []*Vertex
 
 	// Act
@@ -277,11 +306,15 @@ func TestConnectedComponentsCount(t *testing.T) {
 	// Arrange
 	vertex7 := Vertex{key: 70}
 	vertex6 := Vertex{key: 60}
-	vertex5 := Vertex{key: 50, adjacent: []*Vertex{&vertex6}}
-	vertex4 := Vertex{key: 40, adjacent: []*Vertex{&vertex5}}
+	adjacent1 := Adjacent{vertex: &vertex6, distance: 1}
+	vertex5 := Vertex{key: 50, adjacent: []*Adjacent{&adjacent1}}
+	adjacent2 := Adjacent{vertex: &vertex5, distance: 1}
+	vertex4 := Vertex{key: 40, adjacent: []*Adjacent{&adjacent2}}
 	vertex3 := Vertex{key: 30}
-	vertex2 := Vertex{key: 20, adjacent: []*Vertex{&vertex3}}
-	vertex1 := Vertex{key: 10, adjacent: []*Vertex{&vertex2}}
+	adjacent3 := Adjacent{vertex: &vertex3, distance: 1}
+	vertex2 := Vertex{key: 20, adjacent: []*Adjacent{&adjacent3}}
+	adjacent4 := Adjacent{vertex: &vertex2, distance: 1}
+	vertex1 := Vertex{key: 10, adjacent: []*Adjacent{&adjacent4}}
 	graph := Graph{vertices: []*Vertex{&vertex1, &vertex2, &vertex3, &vertex4, &vertex5, &vertex6, &vertex7}}
 
 	// Act
@@ -296,10 +329,15 @@ func TestConnectedComponentsCount(t *testing.T) {
 func TestShortestPath(t *testing.T) {
 	// Arrange
 	vertex4 := Vertex{key: 40}
-	vertex5 := Vertex{key: 50, adjacent: []*Vertex{&vertex4}}
-	vertex3 := Vertex{key: 30, adjacent: []*Vertex{&vertex4}}
-	vertex2 := Vertex{key: 20, adjacent: []*Vertex{&vertex3}}
-	vertex1 := Vertex{key: 10, adjacent: []*Vertex{&vertex2, &vertex5}}
+	adjacent1 := Adjacent{vertex: &vertex4, distance: 1}
+	vertex5 := Vertex{key: 50, adjacent: []*Adjacent{&adjacent1}}
+	adjacent2 := Adjacent{vertex: &vertex4, distance: 1}
+	vertex3 := Vertex{key: 30, adjacent: []*Adjacent{&adjacent2}}
+	adjacent3 := Adjacent{vertex: &vertex3, distance: 1}
+	vertex2 := Vertex{key: 20, adjacent: []*Adjacent{&adjacent3}}
+	adjacent4 := Adjacent{vertex: &vertex2, distance: 1}
+	adjacent5 := Adjacent{vertex: &vertex5, distance: 1}
+	vertex1 := Vertex{key: 10, adjacent: []*Adjacent{&adjacent4, &adjacent5}}
 	graph := Graph{vertices: []*Vertex{&vertex1, &vertex2, &vertex3, &vertex4, &vertex5}}
 
 	// Act
@@ -315,10 +353,15 @@ func TestShortestPathNotFound(t *testing.T) {
 	// Arrange
 	vertex6 := Vertex{key: 60}
 	vertex4 := Vertex{key: 40}
-	vertex5 := Vertex{key: 50, adjacent: []*Vertex{&vertex4}}
-	vertex3 := Vertex{key: 30, adjacent: []*Vertex{&vertex4}}
-	vertex2 := Vertex{key: 20, adjacent: []*Vertex{&vertex3}}
-	vertex1 := Vertex{key: 10, adjacent: []*Vertex{&vertex2, &vertex5}}
+	adjacent1 := Adjacent{vertex: &vertex4, distance: 1}
+	vertex5 := Vertex{key: 50, adjacent: []*Adjacent{&adjacent1}}
+	adjacent2 := Adjacent{vertex: &vertex4, distance: 1}
+	vertex3 := Vertex{key: 30, adjacent: []*Adjacent{&adjacent2}}
+	adjacent3 := Adjacent{vertex: &vertex3, distance: 1}
+	vertex2 := Vertex{key: 20, adjacent: []*Adjacent{&adjacent3}}
+	adjacent4 := Adjacent{vertex: &vertex2, distance: 1}
+	adjacent5 := Adjacent{vertex: &vertex5, distance: 1}
+	vertex1 := Vertex{key: 10, adjacent: []*Adjacent{&adjacent4, &adjacent5}}
 	graph := Graph{vertices: []*Vertex{&vertex1, &vertex2, &vertex3, &vertex4, &vertex5, &vertex6}}
 
 	// Act

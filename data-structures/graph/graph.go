@@ -2,9 +2,14 @@ package graph
 
 import "fmt"
 
+type Adjacent struct {
+	vertex   *Vertex
+	distance int
+}
+
 type Vertex struct {
 	key      int
-	adjacent []*Vertex
+	adjacent []*Adjacent
 }
 
 type Graph struct {
@@ -86,13 +91,13 @@ func (g *Graph) print() {
 		fmt.Println(dequeuedVertex.key)
 
 		for _, adjacent := range dequeuedVertex.adjacent {
-			if vertexWasVisited(visitedVertices, adjacent) {
+			if vertexWasVisited(visitedVertices, adjacent.vertex) {
 				continue
 			}
 
-			visitedVertices = append(visitedVertices, adjacent)
+			visitedVertices = append(visitedVertices, adjacent.vertex)
 
-			newQueueNode = &queueNode{vertex: adjacent}
+			newQueueNode = &queueNode{vertex: adjacent.vertex}
 			auxQueue.enqueue(newQueueNode)
 		}
 	}
@@ -112,7 +117,7 @@ func (g *Graph) getVertex(key int) *Vertex {
 	return nil
 }
 
-func (g *Graph) addEdge(from, to int) {
+func (g *Graph) addEdge(from, to, distance int) {
 	vertexFrom := g.getVertex(from)
 	if vertexFrom == nil {
 		return
@@ -125,13 +130,14 @@ func (g *Graph) addEdge(from, to int) {
 
 	// Validate if vertexFrom already have an edge to vertexTo
 	for _, adjacent := range vertexFrom.adjacent {
-		if adjacent == vertexTo {
+		if adjacent.vertex == vertexTo {
 			return
 		}
 	}
 
 	// Add the new edge
-	vertexFrom.adjacent = append(vertexFrom.adjacent, vertexTo)
+	newAdjacent := Adjacent{vertex: vertexTo, distance: distance}
+	vertexFrom.adjacent = append(vertexFrom.adjacent, &newAdjacent)
 }
 
 func (g *Graph) contains(key int) bool {
@@ -171,7 +177,7 @@ func (g *Graph) hasPath(from, to int) bool {
 		}
 
 		for _, adjacent := range dequeuedVertex.adjacent {
-			newQueueNode = &queueNode{vertex: adjacent}
+			newQueueNode = &queueNode{vertex: adjacent.vertex}
 			auxQueue.enqueue(newQueueNode)
 		}
 	}
@@ -187,7 +193,7 @@ func visitAdjacentVertices(visitedVertices *[]*Vertex, vertex *Vertex) {
 	*visitedVertices = append(*visitedVertices, vertex)
 
 	for _, adjacent := range vertex.adjacent {
-		visitAdjacentVertices(visitedVertices, adjacent)
+		visitAdjacentVertices(visitedVertices, adjacent.vertex)
 	}
 }
 
@@ -240,7 +246,7 @@ func (g *Graph) shortestPath(from, to int) int {
 		}
 
 		for _, adjacent := range dequeuedNode.vertex.adjacent {
-			newQueueNode = &queueNode{vertex: adjacent, distance: dequeuedNode.distance + 1}
+			newQueueNode = &queueNode{vertex: adjacent.vertex, distance: dequeuedNode.distance + 1}
 			auxQueue.enqueue(newQueueNode)
 		}
 	}
