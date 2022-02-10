@@ -1,4 +1,4 @@
-package heap
+package max_heap
 
 type MaxHeap struct {
 	items []int
