@@ -219,7 +219,8 @@ func (g *Graph) connectedComponentsCount() int {
 	return count
 }
 
-func (g *Graph) shortestPath(from, to int) int {
+// Get the shortest number of edges to connect two vertices
+func (g *Graph) shortestNumberOfPathsBetween(from, to int) int {
 	vertexFrom := g.getVertex(from)
 	if vertexFrom == nil {
 		return -1

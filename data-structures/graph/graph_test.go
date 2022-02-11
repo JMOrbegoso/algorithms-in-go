@@ -341,7 +341,7 @@ func TestShortestPath(t *testing.T) {
 	graph := Graph{vertices: []*Vertex{&vertex1, &vertex2, &vertex3, &vertex4, &vertex5}}
 
 	// Act
-	output := graph.shortestPath(10, 40)
+	output := graph.shortestNumberOfPathsBetween(10, 40)
 
 	//Assert
 	if output != 2 {
@@ -365,7 +365,7 @@ func TestShortestPathNotFound(t *testing.T) {
 	graph := Graph{vertices: []*Vertex{&vertex1, &vertex2, &vertex3, &vertex4, &vertex5, &vertex6}}
 
 	// Act
-	output := graph.shortestPath(10, 60)
+	output := graph.shortestNumberOfPathsBetween(10, 60)
 
 	//Assert
 	if output != -1 {
