@@ -19,6 +19,7 @@
   - Max Heaps.
   - Min Heaps.
 - Non-Linear data structures:
+  - Trie.
   - Binary Tree.
   - Binary Search Tree.
   - Graph.
