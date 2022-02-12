@@ -36,6 +36,8 @@
   - Selection Sort.
   - Merge Sort.
   - Quick Sort.
+- Pathfinding algorithms:
+  - Dijkstra's Algorithm.
 - Other algorithms:
   - Factorial.
   - Fibonacci.
