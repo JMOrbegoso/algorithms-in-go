@@ -18,6 +18,7 @@
   - Hash Map.
   - Max Heaps.
   - Min Heaps.
+  - Priority Queue.
 - Non-Linear data structures:
   - Trie.
   - Binary Tree.
